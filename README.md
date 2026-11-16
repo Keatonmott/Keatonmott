@@ -1,50 +1,78 @@
 <p align="center">
-  <img src="./assets/profile-banner.svg" alt="Keaton Mott — practical tools, defensive security, and learning through code" width="100%" />
+  <img src="./assets/profile-banner.svg" alt="Keaton Mott — Windows and Linux internals, useful scripts, and educational proofs of concept" width="100%" />
 </p>
 
 <p align="center">
-  <strong>Defensive security · Windows tooling · Learning through code</strong>
+  <strong>Windows internals · Linux internals · Practical scripts · Educational PoCs</strong>
 </p>
 
 <p align="center">
   <a href="https://github.com/Keatonmott?tab=repositories">Explore my repositories</a>
   &nbsp; / &nbsp;
-  <a href="https://github.com/Keatonmott/ProjectEverything">Try PyQuest</a>
+  <a href="#windows-internals">Windows</a>
+  &nbsp; / &nbsp;
+  <a href="#linux-internals">Linux</a>
+  &nbsp; / &nbsp;
+  <a href="#educational-proofs-of-concept">PoCs</a>
 </p>
 
 ## Hi, I'm Keaton
 
-I build tools that make computers easier to understand and everyday technical work easier to do. My interests center on **defensive cybersecurity, Windows utilities, automation, and interactive ways to learn programming**.
+I'm interested in what happens beneath the interface: how operating systems manage processes, memory, permissions, and the resources applications depend on.
 
-This is where I'll share the projects, scripts, and experiments I develop—along with setup instructions, examples, and notes on what I learned along the way.
+This GitHub will focus on **useful scripts, practical workflows, and possible tool developments related to Windows and Linux internals**, alongside **proofs of concept for educational purposes**. My aim is to connect an underlying mechanism to something you can inspect, reproduce, and understand.
 
-## On the workbench
+## What I'll be sharing
 
-| Project | What it does | Status |
-| :--- | :--- | :--- |
-| **[PyQuest](https://github.com/Keatonmott/ProjectEverything)** | A terminal game for learning Python, data structures, and algorithms. Lessons, coding challenges, tests, and visualizations show how code changes memory and processes data. | **Published** in `ProjectEverything` |
-| **Atlas** | A native Windows filesystem manager with a dark interface, keyboard navigation, nested action menus, markers for batch operations, and adjustable text and layout. | **Working local prototype** · repository planned |
-| **Defensive tools & scripts** | Small utilities for system inspection, repeatable defensive workflows, and automation in authorized environments. | **Planned additions** |
+### Windows internals
 
-### Atlas: the direction
+Scripts, examples, and workflows for exploring how Windows behaves beneath everyday applications. Areas I plan to cover include:
 
-Atlas starts with a simple idea: managing files should feel clear and intuitive. The current prototype supports moving, copying, renaming, search, action history, and eligible undo operations in a single navigable tree.
+- **Processes, threads, and handles** — inspecting execution, object references, resource use, and how applications interact with the operating system.
+- **Memory and execution** — examining virtual memory, allocations, modules, and the relationship between application code and Windows APIs.
+- **Services, the registry, and permissions** — understanding configuration, execution context, access tokens, and access checks.
+- **Debugging and observation** — using tools such as WinDbg, event logs, and tracing to work from a symptom toward an explanation.
 
-I'm developing it toward a more complete desktop product. **Compression, encryption, and a guided walkthrough are future features**, not capabilities of the current build.
+### Linux internals
 
-## What I'll be posting
+Practical investigations into Linux behavior, with scripts and documented workflows that make system state easier to inspect. Areas I plan to explore include:
 
-- **Windows tools** — practical desktop applications and filesystem utilities, with screenshots and usage examples.
-- **Defensive security scripts** — focused tools with a clear purpose, setup steps, and documented limitations.
-- **Automation & lab notes** — repeatable workflows and explanations of how things work.
-- **Learning experiments** — interactive projects that make programming concepts easier to see and practice.
+- **Processes and signals** — examining process relationships, execution state, and communication.
+- **System calls and file descriptors** — following how programs request kernel services and interact with files, pipes, and sockets.
+- **Memory and system interfaces** — investigating virtual memory and the information exposed through `/proc` and `/sys`.
+- **Permissions and isolation** — exploring ownership, capabilities, namespaces, and the boundaries between processes and their environment.
+- **Debugging and tracing** — using tools such as GDB and strace to connect observed behavior with the code and system calls behind it.
 
-## How I build
+### Useful scripts and repeatable workflows
 
-**Python** for tools and learning projects · **C# / .NET** for Windows applications · **PowerShell** for automation · **Git** for version control.
+The emphasis will be on tools with a specific job: gathering relevant system information, reducing repetitive inspection work, comparing system state, or making a diagnostic process easier to repeat.
 
-I combine hands-on development with AI-assisted coding, then review and test the results. I care about understandable interfaces, useful documentation, and being clear about what works today versus what is still in progress.
+Workflows will explain **the question being investigated, the environment, the steps taken, the expected observations, and what those observations mean**. Where behavior depends on an operating-system version, configuration, or privilege level, I'll document that context.
+
+### Educational proofs of concept
+
+Focused examples that demonstrate an operating-system mechanism, security concept, or interesting failure condition in a reproducible lab setting.
+
+The goal is to explain **why something happens**, not just present a result. I intend to include the setup, relevant code, expected behavior, an explanation of the outcome, and the limitations of each example. These will be learning material, with experimental work clearly identified.
+
+## Possible developments
+
+Some scripts and workflows may grow into more complete utilities when there is a useful reason to do so. I'll distinguish small experiments, working prototypes, and more mature tools so their status is clear.
+
+**Atlas** is one current local prototype: a native Windows filesystem manager exploring keyboard-driven navigation, file operations, and an adaptable interface. Its source is not published here yet; any future repository will describe the implemented features and remaining work.
+
+## What I want each post to provide
+
+| Part | Purpose |
+| :--- | :--- |
+| **A clear problem or question** | Explain what the script, workflow, or PoC is meant to address. |
+| **Setup and prerequisites** | Identify the environment and requirements needed to reproduce it. |
+| **Readable code and practical examples** | Make the implementation useful to study and adapt. |
+| **Observations and explanation** | Show the output and connect it to the underlying system behavior. |
+| **Limitations and status** | Be clear about what was tested, what is experimental, and what remains unfinished. |
+
+These are the areas I plan to publish in. The repositories themselves will show what is currently available.
 
 ---
 
-<p align="center"><sub>Build something useful. Understand how it works. Keep improving it.</sub></p>
+<p align="center"><sub>Inspect the system. Understand the mechanism. Build something useful.</sub></p>
