@@ -1,78 +1,143 @@
 <p align="center">
-  <img src="./assets/profile-banner.svg" alt="Keaton Mott — Windows and Linux internals, useful scripts, and educational proofs of concept" width="100%" />
+  <img src="./assets/profile-banner.svg" alt="Keaton Mott — stock Windows security and educational security research" width="100%" />
 </p>
 
 <p align="center">
-  <strong>Windows internals · Linux internals · Practical scripts · Educational PoCs</strong>
+  <strong>Stock Windows security · Active Directory · Protocol fuzzing · Educational PoCs</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Keatonmott?tab=repositories">Explore my repositories</a>
+  <a href="https://github.com/Keatonmott?tab=repositories">Repositories</a>
   &nbsp; / &nbsp;
-  <a href="#windows-internals">Windows</a>
+  <a href="#stock-windows-security">Windows security</a>
   &nbsp; / &nbsp;
-  <a href="#linux-internals">Linux</a>
+  <a href="#active-directory-security">AD security</a>
   &nbsp; / &nbsp;
-  <a href="#educational-proofs-of-concept">PoCs</a>
+  <a href="#protocol-fuzzing">Fuzzing</a>
 </p>
 
 ## Hi, I'm Keaton
 
-I'm interested in what happens beneath the interface: how operating systems manage processes, memory, permissions, and the resources applications depend on.
+I am interested in the security of Windows as it ships.
 
-This GitHub will focus on **useful scripts, practical workflows, and possible tool developments related to Windows and Linux internals**, alongside **proofs of concept for educational purposes**. My aim is to connect an underlying mechanism to something you can inspect, reproduce, and understand.
+I want to understand the default attack surface before extra roles or third-party products change the system. That means looking at the parts people rely on every day and asking how they behave under stress.
 
-## What I'll be sharing
+This GitHub will hold useful scripts and repeatable workflows. It will also hold possible tool developments and educational proofs of concept.
 
-### Windows internals
+Windows comes first. Linux research will follow after the Windows work has a solid base.
 
-Scripts, examples, and workflows for exploring how Windows behaves beneath everyday applications. Areas I plan to cover include:
+## Stock Windows security
 
-- **Processes, threads, and handles** — inspecting execution, object references, resource use, and how applications interact with the operating system.
-- **Memory and execution** — examining virtual memory, allocations, modules, and the relationship between application code and Windows APIs.
-- **Services, the registry, and permissions** — understanding configuration, execution context, access tokens, and access checks.
-- **Debugging and observation** — using tools such as WinDbg, event logs, and tracing to work from a symptom toward an explanation.
+The first phase will study a clean Windows installation. I want a clear picture of what is enabled and what trusts what.
 
-### Linux internals
+Areas of interest include:
 
-Practical investigations into Linux behavior, with scripts and documented workflows that make system state easier to inspect. Areas I plan to explore include:
+- Default services and scheduled tasks
+- Processes and threads
+- Handles and object lifetimes
+- Access tokens and integrity levels
+- ACLs and local privilege boundaries
+- Registry persistence points
+- COM and RPC surfaces
+- Drivers and user-to-kernel boundaries
+- Event logs and ETW providers
+- Defender and firewall behavior
+- Native APIs and system call paths
 
-- **Processes and signals** — examining process relationships, execution state, and communication.
-- **System calls and file descriptors** — following how programs request kernel services and interact with files, pipes, and sockets.
-- **Memory and system interfaces** — investigating virtual memory and the information exposed through `/proc` and `/sys`.
-- **Permissions and isolation** — exploring ownership, capabilities, namespaces, and the boundaries between processes and their environment.
-- **Debugging and tracing** — using tools such as GDB and strace to connect observed behavior with the code and system calls behind it.
+The work will start with observation. Scripts will collect state and compare changes after a controlled action.
 
-### Useful scripts and repeatable workflows
+Debugging will go deeper when the evidence points there. WinDbg and Application Verifier may be used with page heap or targeted tracing.
 
-The emphasis will be on tools with a specific job: gathering relevant system information, reducing repetitive inspection work, comparing system state, or making a diagnostic process easier to repeat.
+The goal is to explain the path from input to behavior. A useful result should show which component handled the input and why the result matters.
 
-Workflows will explain **the question being investigated, the environment, the steps taken, the expected observations, and what those observations mean**. Where behavior depends on an operating-system version, configuration, or privilege level, I'll document that context.
+## Active Directory security
 
-### Educational proofs of concept
+Active Directory will be the next major Windows focus. The work will begin with small lab domains and documented trust boundaries.
 
-Focused examples that demonstrate an operating-system mechanism, security concept, or interesting failure condition in a reproducible lab setting.
+Planned areas include:
 
-The goal is to explain **why something happens**, not just present a result. I intend to include the setup, relevant code, expected behavior, an explanation of the outcome, and the limitations of each example. These will be learning material, with experimental work clearly identified.
+- Domain joins and machine accounts
+- Kerberos tickets and delegation
+- NTLM fallback behavior
+- LDAP queries and directory permissions
+- DNS integration and dynamic updates
+- SMB shares and session security
+- RPC endpoints and remote management
+- Group Policy processing
+- Service accounts and SPNs
+- Delegated rights and nested groups
+- AD Certificate Services
+- Trust relationships and attack paths
+- Logging and detection coverage
 
-## Possible developments
+I want to trace how identity moves through the domain. That includes the point where a local decision becomes a domain decision.
 
-Some scripts and workflows may grow into more complete utilities when there is a useful reason to do so. I'll distinguish small experiments, working prototypes, and more mature tools so their status is clear.
+Each AD workflow will show the lab design and the expected security boundary. It will also show the evidence that supports the conclusion.
 
-**Atlas** is one current local prototype: a native Windows filesystem manager exploring keyboard-driven navigation, file operations, and an adaptable interface. Its source is not published here yet; any future repository will describe the implemented features and remaining work.
+## Protocol fuzzing
 
-## What I want each post to provide
+Protocol fuzzing will focus on parsers and state machines in controlled environments. Targets may include DNS and SSH plus Kerberos.
 
-| Part | Purpose |
-| :--- | :--- |
-| **A clear problem or question** | Explain what the script, workflow, or PoC is meant to address. |
-| **Setup and prerequisites** | Identify the environment and requirements needed to reproduce it. |
-| **Readable code and practical examples** | Make the implementation useful to study and adapt. |
-| **Observations and explanation** | Show the output and connect it to the underlying system behavior. |
-| **Limitations and status** | Be clear about what was tested, what is experimental, and what remains unfinished. |
+AD-related work may also cover LDAP and SMB plus RPC. The exact target will depend on what can be isolated and measured safely.
 
-These are the areas I plan to publish in. The repositories themselves will show what is currently available.
+I plan to explore several fuzzing styles:
+
+- Mutation fuzzing from known-good traffic
+- Generation fuzzing from a protocol model
+- Coverage-guided fuzzing
+- Structure-aware fuzzing
+- Stateful sequence fuzzing
+- Differential testing between implementations
+- Replay-based regression testing
+
+A harness should make the target easy to drive and easy to observe. It should also keep each test case repeatable.
+
+The useful part is not a pile of random crashes. The useful part is a minimized input with a clear execution path and a reasoned explanation.
+
+## Custom harnesses and educational PoCs
+
+Some findings need a custom harness before they can be understood. I plan to build small harnesses around the affected parser or API.
+
+Memory safety research may cover:
+
+- Use-after-free conditions caused by dangling pointers
+- Double-free conditions
+- Out-of-bounds reads or writes
+- Integer overflow and truncation
+- Race conditions
+- Invalid lifetime transitions
+- Unexpected state reuse
+
+A use-after-free PoC should show when the object is released and when the stale reference is used. It should also show which allocation replaces the old object when that detail matters.
+
+The harness will aim for deterministic reproduction. Crash capture and debugger traces will support the analysis.
+
+The work will stop at controlled reproduction and root-cause analysis. The purpose is education and defensive understanding.
+
+## Useful scripts and workflows
+
+Scripts will have a specific job. A script may inventory a surface or collect evidence from a test.
+
+Workflows will be written so another person can repeat them. Each one should include:
+
+1. The question being tested
+2. The lab setup
+3. The required privilege level
+4. The input or trigger
+5. The expected behavior
+6. The observed behavior
+7. The debugger or log evidence
+8. The limits of the conclusion
+9. Possible mitigations or detection ideas
+
+I will mark work as planned or experimental or working. Published results will say what was actually tested.
+
+## Linux later
+
+Linux internals will come later. That work may cover system calls and namespaces plus capabilities.
+
+It may also cover memory behavior and service isolation plus protocol implementations. The same rule will apply: show the mechanism and document the evidence.
 
 ---
 
-<p align="center"><sub>Inspect the system. Understand the mechanism. Build something useful.</sub></p>
+<p align="center"><sub>Inspect the boundary. Reproduce the behavior. Explain the cause.</sub></p>
